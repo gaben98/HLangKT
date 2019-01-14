@@ -1,0 +1,38 @@
+Program := Expr;
+Expr := Literal
+	| Identifier
+	| MethodCall
+	| UnOp Expr
+	| Expr BinOp Expr;
+MethodCall := Identifier ("\." Identifier)* "\." Identifier Tuple;
+MethodDecl := Identifier ":" MethodDef ":=" ( Expr | Scope );
+MethodDef := (Tuple | Type) "->" (Tuple | Type);
+Scope := "\{" Expr ("\n" Expr)* "\}";
+VarDecl := Identifier ":" Type ("=" Expr)?;
+Type := Identifier;
+Identifier := Letter (Letter | Digit)*;
+Tuple := "\(" Identifier ("," Identifier)* "\)";
+TupleDecl := "\(" VarDecl ("," VarDecl)* "\)";
+UnOp := "!";
+BinOp := "\+"
+	| "-"
+	| "\*"
+	| "/"
+	| "\*\*"
+	| "<=?"
+	| ">=?"
+	| "\|"
+	| "&"
+	| "\|\|"
+	| "&&"
+	| "==";
+Literal := String
+	| Integer
+	| Char
+	| Real;
+String :=  "\"" Char* "\"";
+Char := "'.'";
+Integer := Digit+;
+Real := Digit* "\." Digit+;
+Digit := "[0-9]";
+Letter := "[A-z]";
