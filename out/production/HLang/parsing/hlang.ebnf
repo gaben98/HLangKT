@@ -12,6 +12,7 @@ VarDecl := Identifier ":" Type ("=" Expr)?;
 Type := Identifier;
 Identifier := Letter (Letter | Digit)*;
 Tuple := "\(" Identifier ("," Identifier)* "\)";
+Unit := "\(\)"
 TupleDecl := "\(" VarDecl ("," VarDecl)* "\)";
 UnOp := "!";
 BinOp := "\+"

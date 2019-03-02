@@ -2,6 +2,7 @@ package parsing
 
 import kotlin.io.*
 import java.io.*
+import parsing.tokenization.*
 
 fun parse(filename: String): GVM {
 	val file = File(filename)
