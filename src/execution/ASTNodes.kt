@@ -1,7 +1,6 @@
 package execution
 
-import core.HData
-import core.htypes
+import core.typesystem.*
 import java.net.ContentHandler
 
 abstract class ASTNode(private val evaluator: () -> Result) {
@@ -9,12 +8,12 @@ abstract class ASTNode(private val evaluator: () -> Result) {
 }
 
 data class Result(val data: HData)
-
+/*
 class StrNode(content: String): ASTNode({ Result(HData(htypes["string"], content)) })
 class ChrNode(content: Char): ASTNode({ Result(HData(htypes["char"], content)) })
 class IntNode(content: Int): ASTNode({ Result(HData(htypes["int"], content))})
 class RealNode(content: Float): ASTNode({ Result(HData(htypes["real"], content))})
-
+*/
 class LiteralNode(child: ASTNode): ASTNode(child::eval)
 
 

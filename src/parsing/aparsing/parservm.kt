@@ -1,4 +1,4 @@
-package parsing
+package parsing.aparsing
 
 import kotlin.collections.*
 
@@ -23,7 +23,7 @@ open class GVM(private val expressions: Map<String, SubInst>) {
 					}
 				}
             }
-            swap()
+			swap()
         }
         for((inst, arr) in c) {
             when (inst) {

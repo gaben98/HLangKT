@@ -1,4 +1,4 @@
-package parsing
+package parsing.aparsing
 
 import kotlin.io.*
 import java.io.*
@@ -23,7 +23,11 @@ private fun parseLine(tokens: Array<String>): Pair<String, SubInst> {
 fun parseExpression(tokens: Array<String>, tag: String, next: Inst): Inst {
 	if(tokens.isEmpty()) return next
 	if(tokens.count() == 1) return parseAtom(tokens[0], tag, next)
-	if(tokens.last() == "?") return parseOption(tokens.sliceArray(0 until tokens.count() - 1), tag, next)
+	if(tokens.last() == "?") return parseOption(
+		tokens.sliceArray(0 until tokens.count() - 1),
+		tag,
+		next
+	)
 	if(tokens.last() == "*") return parseStar(tokens.sliceArray(0 until tokens.count() - 1), tag, next)
 	if(tokens.last() == "+") return parsePlus(tokens.sliceArray(0 until tokens.count() - 1), tag, next)
 	//if surrounded by parens, remove them
@@ -100,7 +104,11 @@ private fun splitAlternation(tokens: Array<String>, tag: String, next: Inst): In
 
 private fun parseAtom(token: String, tag: String, next: Inst): Inst {
 	//an atom is either a token match or a call to a subexpression
-	if(token[0] == '"') return Atom(next, ( '^' + token.substring(1 until token.length - 1) + '$').toRegex(), tag)
+	if(token[0] == '"') return Atom(
+		next,
+		('^' + token.substring(1 until token.length - 1) + '$').toRegex(),
+		tag
+	)
     return Reference(next, token)
 }
 

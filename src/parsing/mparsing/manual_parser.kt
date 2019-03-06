@@ -1,7 +1,6 @@
-package mparsing
+package parsing.mparsing
 
 import parsing.tokenization.lsplit
-import javax.xml.crypto.Data
 
 open class ManualParser {
 	open fun ParseExpression(tokens: Array<String>): ExprNode? {
@@ -10,7 +9,8 @@ open class ManualParser {
 			if(data != null) return ExprNode(data)
 		}
 		if(tokens.count { it == "(" } != tokens.count { it == ")" }) return null//if parens are imbalanced, def not an expression
-		val data = tryOptions<DataNode>(tokens, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseFunctionCall)
+		val data = tryOptions<DataNode>(tokens, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseGroup, ::ParseFunctionCall)
+		if(data is ExprNode) return data
 		if(data != null) return ExprNode(data)
 		return null
 	}
@@ -51,24 +51,38 @@ open class ManualParser {
 
 	open fun ParseChar(tokens: Array<String>): CharNode? {
 		if(tokens.count() == 1) {
-			if(tokens[0].length == 3 && tokens[0][0] == '\'' && tokens[0][2] == '\'') return CharNode(tokens[0][1])
+			if(tokens[0].length == 3 && tokens[0][0] == '\'' && tokens[0][2] == '\'') return CharNode(
+				tokens[0][1]
+			)
 		}
 		return null
 	}
 
 	open fun ParseString(tokens: Array<String>): StringNode? {
 		if(tokens.count() == 1) {
-			if(tokens[0].length > 1 && tokens[0][0] == '"' && tokens[0].last() == '"') return StringNode(tokens[0].substring(1 until tokens[0].lastIndex))
+			if(tokens[0].length > 1 && tokens[0][0] == '"' && tokens[0].last() == '"') return StringNode(
+				tokens[0].substring(1 until tokens[0].lastIndex)
+			)
 		}
 		return null
 	}
 
 	open fun ParseTuple(tokens: Array<String>): TupleNode? {
+		if(tokens.count() == 2 && tokens[0] == "(" && tokens[1] == ")") return UnitNode()
 		if(tokens.count() > 1 && tokens[0] == "(" && tokens.last() == ")") {
 			val split = lsplit(tokens.sliceArray(1 until tokens.lastIndex), "(", ")", ",")
+			if(split.count() == 1) return null
 			val exprs = split.map { ParseExpression(it) }.toTypedArray()
 			val nexprs = exprs.requireNoNulls().map { it as DataNode }.toTypedArray()
 			if(exprs.count() == nexprs.count()) return TupleNode(nexprs)
+		}
+		return null
+	}
+
+	open fun ParseGroup(tokens: Array<String>): ExprNode? {
+		if(tokens.count() > 1 && tokens[0] == "(" && tokens.last() == ")") {
+			val innerToks = tokens.sliceArray(1 until tokens.lastIndex)
+			return ParseExpression(innerToks)
 		}
 		return null
 	}
@@ -96,13 +110,21 @@ open class ManualParser {
 	}
 
 	open fun ParseBinOp(tks: Array<String>): BinOpNode? {
-		val bins = arrayOf("+", "-", "*", "/", "**", "<", "<=", ">", ">=", "|", "||", "&", "&&", "==")
-		val binIndices = tks.mapIndexed { index: Int, s: String -> if (bins.contains(s)) index else null  }.filterNotNull()
+		val bins = arrayOf("^", "*", "/", "+", "-", "<", "<=", ">", ">=", "&", "&&", "|", "||", "==")
+		for(bin in bins.reversed()) {
+			val binIndices = tks.mapIndexed { index: Int, s: String -> if (s == bin) index else null  }.filterNotNull()
+			for(index in binIndices) {
+				val prefix = ParseExpression(tks.sliceArray(0 until index))
+				val suffix = ParseExpression(tks.sliceArray(index+1..tks.lastIndex))
+				if(prefix != null && suffix != null) return BinOpNode(tks[index], prefix, suffix)
+			}
+		}
+		/*val binIndices = tks.mapIndexed { index: Int, s: String -> if (bins.contains(s)) index else null  }.filterNotNull()
 		for(index in binIndices) {
 			val prefix = ParseExpression(tks.sliceArray(0 until index))
 			val suffix = ParseExpression(tks.sliceArray(index+1..tks.lastIndex))
 			if(prefix != null && suffix != null) return BinOpNode(tks[index], prefix, suffix)
-		}
+		}*/
 		return null
 	}
 
@@ -114,18 +136,3 @@ open class ManualParser {
 		return null
 	}
 }
-
-open class ASTNode
-open class DataNode: ASTNode()//node that can be interpreted as data
-open class LiteralNode: DataNode()//node that holds a literal
-open class RealNode(val value: Double): LiteralNode()
-open class IntNode(val value: Int): LiteralNode()
-open class BoolNode(val value: Boolean): LiteralNode()
-open class CharNode(val value: Char): LiteralNode()
-open class StringNode(val value: String): LiteralNode()
-open class IdNode(val identifier: String): DataNode()
-open class TupleNode(val components: Array<DataNode>): DataNode()
-open class FunctionCallNode(val name: String, val call: TupleNode): DataNode()
-open class UnOpNode(val operator: String, val expr: ExprNode): DataNode()
-open class BinOpNode(val operator: String, val prefix: ExprNode, val suffix: ExprNode): DataNode()
-open class ExprNode(val result: DataNode): DataNode()

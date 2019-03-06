@@ -39,25 +39,8 @@ fun genericTokenize(text: String, vararg iDelims: String, eDelims: String, toggl
 }
 
 fun grammarTokenize(text: String): Array<String> = genericTokenize(text, *("()[]+*|?;".map { it.toString() }.toTypedArray() + arrayOf(":=")), eDelims = " 	", toggles =  "\"")
-fun hlangTokenize(text: String): Array<String> = genericTokenize(text, *"()[]+*|?!;,".map { it.toString() }.toTypedArray(), eDelims = " 	", toggles = "\"")
 
-//(my, "friend", 65, f(3, 5))
-//[ ( my , "friend" , 65 , f ( 3 , 5 ) ) ]
-//[ my ] [ "friend" ] [ 65 ] [ f ( 3 , 5 )]
-//lsplit([ ( my , "friend" , 65 , f ( 3 , 5 )  ) ], 1, "(", ")", ",")
-//lsp([ ( my , "friend" , 65 , f ( 3 , 5 )  ) ], 0, [])
-//lsp([ my , "friend" , 65 , f ( 3 , 5 )  ) ], 1, [])
-//lsp([ , "friend" , 65 , f ( 3 , 5 )  ) ], 1, [ my ])
-//[ my ] + lsp([ "friend" , 65 , f ( 3 , 5 )  ) ], 1, [])
-//[ my ] + lsp([ , 65 , f ( 3 , 5 )  ) ], 1, [ "friend" ])
-//[ my ] + [ "friend ] + lsp([ 65 , f ( 3 , 5 )  ) ], 1, [])
-//[ my ] + [ "friend ] + lsp([ , f ( 3 , 5 )  ) ], 1, [ 65 ])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ f ( 3 , 5 )  ) ], 1, [])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ ( 3 , 5 )  ) ], 1, [ f ])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ 3 , 5 )  ) ], 1, [ f ( ])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ , 5 )  ) ], 1, [ f ( 3 ])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ 5 )  ) ], 1, [ f ( 3 ,  ])
-//[ my ] + [ "friend ] + [ 65 ] + lsp([ )  ) ], 1, [ f ( 3 , 5 ])
+fun hlangTokenize(text: String): Array<String> = genericTokenize(text, *"()[]+*|?!;,".map { it.toString() }.toTypedArray(), eDelims = " 	", toggles = "\"")
 
 //splits tokens but only splits at the base level
 fun lsplit(tokens: Array<String>, opener: String, closer: String, splitter: String): Array<Array<String>> {

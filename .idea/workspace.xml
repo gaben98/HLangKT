@@ -2,20 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2e0723b-491b-4229-b5e5-027da916dc18" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/core/HData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/HType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/execution/ASTNodes.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/parsing/manparse_tests.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/parsing/manual_parser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/REPL/REPL.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/HEnvironment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/hTreeType.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/primes.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/parsing/mparsing/ASTNodes.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HLang/META-INF/HLang.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HLang/META-INF/HLang.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HLang/hlang.ebnf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gparser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/gparser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hlang.ebnf" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/hlang.ebnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hlang_tests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/hlang_tests.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexemes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/lexemes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parservm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/parservm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tokenization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tokenization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/HType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/HType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execution/ASTNodes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/execution/ASTNodes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/gparser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/aparsing/gparser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/hlang_tests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/aparsing/hlang_tests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/lexemes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/aparsing/lexemes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/manparse_tests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/manual_parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/mparsing/manual_parser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/parservm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/aparsing/parservm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parsing/tokenization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/parsing/tokenization.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,42 +30,72 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/parsing/manual_parser.kt">
+        <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
-              <folding>
-                <element signature="e#18#81#0" expanded="true" />
-                <element signature="n#!!block;n#ParseLiteral#0;n#!!block;n#ManualParser#0" />
-                <element signature="n#!!block;n#ParseIdentifier#0;n#!!block;n#ManualParser#0" />
-                <element signature="n#!!block;n#ParseInt#0;n#!!block;n#ManualParser#0" />
-                <element signature="n#!!block;n#ParseBool#0;n#!!block;n#ManualParser#0" />
-                <element signature="n#!!block;n#ParseChar#0;n#!!block;n#ManualParser#0" />
-                <element signature="n#!!block;n#ParseChar#1;n#!!block;n#ManualParser#0" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/parsing/manparse_tests.kt">
+        <entry file="file://$PROJECT_DIR$/src/REPL/REPL.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="51">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/ASTNodes.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="47" column="64" selection-start-line="47" selection-start-column="64" selection-end-line="47" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/HEnvironment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
               <folding>
-                <element signature="e#18#109#0" expanded="true" />
+                <element signature="e#26#123#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/parsing/tokenization.kt">
+        <entry file="file://$PROJECT_DIR$/src/core/HData.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="201">
-              <caret line="67" column="59" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/hTreeType.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/manual_parser.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
               <folding>
-                <element signature="n#!!block;n#pcont#0;n#!!block;n#genericTokenize#0" />
+                <element signature="n#!!block;n#ParseLiteral#0;n#!!block;n#ManualParser#0" />
+                <element signature="n#!!block;n#ParseIdentifier#0;n#!!block;n#ManualParser#0" />
+                <element signature="n#!!block;n#ParseInt#0;n#!!block;n#ManualParser#0" />
+                <element signature="n#!!block;n#ParseChar#0;n#!!block;n#ManualParser#0" />
               </folding>
             </state>
           </provider>
@@ -71,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/parsing/hlang.ebnf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="32" column="10" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="10" />
+            <state relative-caret-position="136">
+              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -83,6 +116,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin File" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -94,10 +128,24 @@
       <find>Pair&lt;Boolean, ASTNode?&gt;</find>
       <find>TryOptions</find>
       <find>IdNode</find>
+      <find>generator</find>
+      <find>func</find>
+      <find>int64</find>
+      <find>Type(): H</find>
+      <find>UnitNode</find>
+      <find>Execute()</find>
+      <find>fun Execute()</find>
+      <find>ParseTuple</find>
     </findStrings>
     <replaceStrings>
       <replace>ASTNode?</replace>
       <replace>tryOptions</replace>
+      <replace>Generator</replace>
+      <replace>fun</replace>
+      <replace>Int</replace>
+      <replace>Type(): IH</replace>
+      <replace>Execute(state: HState)</replace>
+      <replace>fun Execute(state: HState)</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -113,14 +161,21 @@
         <option value="$PROJECT_DIR$/src/parservm.kt" />
         <option value="$PROJECT_DIR$/src/lexemes.kt" />
         <option value="$PROJECT_DIR$/src/parsing/hlang.ebnf" />
-        <option value="$PROJECT_DIR$/src/core/HData.kt" />
-        <option value="$PROJECT_DIR$/src/core/HType.kt" />
-        <option value="$PROJECT_DIR$/src/execution/ASTNodes.kt" />
         <option value="$PROJECT_DIR$/src/parsing/gparser.kt" />
         <option value="$PROJECT_DIR$/src/parsing/hlang_tests.kt" />
-        <option value="$PROJECT_DIR$/src/parsing/tokenization.kt" />
-        <option value="$PROJECT_DIR$/src/parsing/manparse_tests.kt" />
         <option value="$PROJECT_DIR$/src/parsing/manual_parser.kt" />
+        <option value="$PROJECT_DIR$/src/parsing/manparse_tests.kt" />
+        <option value="$PROJECT_DIR$/src/parsing/tokenization.kt" />
+        <option value="$PROJECT_DIR$/src/core/HType.kt" />
+        <option value="$PROJECT_DIR$/src/core/primes.kt" />
+        <option value="$PROJECT_DIR$/src/execution/ASTNodes.kt" />
+        <option value="$PROJECT_DIR$/src/core/HData.kt" />
+        <option value="$PROJECT_DIR$/src/core/hTreeType.kt" />
+        <option value="$PROJECT_DIR$/src/core/HEnvironment.kt" />
+        <option value="$PROJECT_DIR$/src/parsing/mparsing/ASTNodes.kt" />
+        <option value="$PROJECT_DIR$/src/parsing/mparsing/manual_parser.kt" />
+        <option value="$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt" />
+        <option value="$PROJECT_DIR$/src/REPL/REPL.kt" />
       </list>
     </option>
   </component>
@@ -151,19 +206,14 @@
               <item name="HLangKT" type="b2602c69:ProjectViewProjectNode" />
               <item name="HLangKT" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HLangKT" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HLangKT" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="execution" type="462c0819:PsiDirectoryNode" />
+              <item name="parsing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HLangKT" type="b2602c69:ProjectViewProjectNode" />
               <item name="HLangKT" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="parsing" type="462c0819:PsiDirectoryNode" />
+              <item name="mparsing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -186,10 +236,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Kotlin" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gaben\IdeaProjects\HLangKT\src\parsing\aparsing" />
+      <recent name="C:\Users\gaben\IdeaProjects\HLangKT\src\parsing\mparsing" />
       <recent name="C:\Users\gaben\IdeaProjects\HLangKT\src\parsing" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gaben\IdeaProjects\HLangKT\src\parsing" />
     </key>
   </component>
@@ -205,7 +257,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ManParseTest.testManParse">
+  <component name="RunManager" selected="JUnit.ManParseTest.testManParse (1)">
     <configuration name="ManParseTest.findProblem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HLang" />
       <extension name="coverage">
@@ -217,6 +269,23 @@
       <option name="PACKAGE_NAME" value="parsing" />
       <option name="MAIN_CLASS_NAME" value="mparsing.ManParseTest" />
       <option name="METHOD_NAME" value="findProblem" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ManParseTest.testManParse (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HLang" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="parsing.mparsing.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="parsing.mparsing" />
+      <option name="MAIN_CLASS_NAME" value="parsing.mparsing.ManParseTest" />
+      <option name="METHOD_NAME" value="testManParse" />
       <option name="TEST_OBJECT" value="method" />
       <option name="PARAMETERS" value="" />
       <method v="2">
@@ -282,30 +351,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test.testVMInst" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HLang" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="parsing.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="parsing.test" />
-      <option name="METHOD_NAME" value="testVMInst" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ManParseTest.testManParse (1)" />
         <item itemvalue="JUnit.ManParseTest.testManParse" />
         <item itemvalue="JUnit.ManParseTest.findProblem" />
         <item itemvalue="JUnit.test.testGParse" />
         <item itemvalue="JUnit.test.testTokenization" />
-        <item itemvalue="JUnit.test.testVMInst" />
       </list>
     </recent_temporary>
   </component>
@@ -323,48 +375,49 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 17m 21s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 11h 14m 08s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 25m 18s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 03m 55s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 25m 59s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 04m 45s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 30m 34s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 04m 58s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 31m 18s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 07m 27s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 34m 12s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 10m 20s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 36m 17s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 14m 56s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 36m 49s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 18m 55s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 38m 15s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 20m 15s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ManParseTest_testManParse - 2019.03.02 at 16h 41m 37s.xml">
-      <configuration name="ManParseTest.testManParse" configurationId="JUnit" />
+    <history-entry file="ManParseTest_testManParse_(1) - 2019.03.06 at 13h 20m 46s.xml">
+      <configuration name="ManParseTest.testManParse (1)" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24161074" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24496645" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.36997318" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.36997318" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -378,101 +431,48 @@
       <window_info anchor="right" id="Maven" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24161074" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.36997318" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3297587" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24966443" />
-      <window_info anchor="right" id="Maven" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-    </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/hlang_tests.kt</url>
+          <url>file://$PROJECT_DIR$/src/parsing/aparsing/hlang_tests.kt</url>
           <line>22</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/hlang_tests.kt</url>
+          <url>file://$PROJECT_DIR$/src/parsing/aparsing/hlang_tests.kt</url>
           <line>27</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/hlang_tests.kt</url>
+          <url>file://$PROJECT_DIR$/src/parsing/aparsing/hlang_tests.kt</url>
           <line>34</line>
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/parservm.kt</url>
+          <url>file://$PROJECT_DIR$/src/parsing/aparsing/parservm.kt</url>
           <line>10</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manparse_tests.kt</url>
-          <line>13</line>
+          <url>file://$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt</url>
+          <line>16</line>
           <properties />
-          <option name="timeStamp" value="51" />
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manparse_tests.kt</url>
-          <line>12</line>
+          <url>file://$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt</url>
+          <line>15</line>
           <properties />
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manual_parser.kt</url>
-          <line>66</line>
-          <properties />
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manual_parser.kt</url>
-          <line>110</line>
-          <properties />
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manual_parser.kt</url>
-          <line>12</line>
-          <properties />
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/parsing/manual_parser.kt</url>
-          <line>76</line>
-          <properties />
-          <option name="timeStamp" value="80" />
+          <option name="timeStamp" value="116" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="tokens[0].substring(1 until tokens[0].lastIndex)" language="kotlin" />
-        <watch expression="typeof(T)" language="kotlin" />
-        <watch expression="((String[])e1)[7]" custom="java.lang.String[]" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -535,85 +535,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/lexemes.kt">
+    <entry file="file://$PROJECT_DIR$/src/parsing/aparsing/lexemes.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="20" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HData.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/parservm.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/HType.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/execution/ASTNodes.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/gparser.kt">
+    <entry file="file://$PROJECT_DIR$/src/parsing/aparsing/gparser.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/hlang_tests.kt">
+    <entry file="file://$PROJECT_DIR$/src/parsing/aparsing/hlang_tests.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
           <folding>
             <element signature="e#17#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/ParentRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/hlang.ebnf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="32" column="10" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/tokenization.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="67" column="59" selection-start-line="67" selection-start-column="59" selection-end-line="67" selection-end-column="59" />
-          <folding>
-            <element signature="n#!!block;n#pcont#0;n#!!block;n#genericTokenize#0" />
           </folding>
         </state>
       </provider>
@@ -625,31 +566,208 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/manual_parser.kt">
+    <entry file="file://$PROJECT_DIR$/src/core/HType.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="663">
+          <caret line="39" column="44" lean-forward="true" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/primes.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/execution/ASTNodes.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
           <folding>
-            <element signature="e#18#81#0" expanded="true" />
+            <element signature="e#19#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/java/lang/reflect/InvocationTargetException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/aparsing/parservm.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="57" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/ParentRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="203" selection-start-line="203" selection-end-line="203" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/tokenization.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="n#!!block;n#pcont#0;n#!!block;n#genericTokenize#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/hlang.ebnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/hTreeType.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/HEnvironment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#26#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/HData.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/ASTNodes.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="47" column="64" selection-start-line="47" selection-start-column="64" selection-end-line="47" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/manual_parser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding>
             <element signature="n#!!block;n#ParseLiteral#0;n#!!block;n#ManualParser#0" />
             <element signature="n#!!block;n#ParseIdentifier#0;n#!!block;n#ManualParser#0" />
             <element signature="n#!!block;n#ParseInt#0;n#!!block;n#ManualParser#0" />
-            <element signature="n#!!block;n#ParseBool#0;n#!!block;n#ManualParser#0" />
             <element signature="n#!!block;n#ParseChar#0;n#!!block;n#ManualParser#0" />
-            <element signature="n#!!block;n#ParseChar#1;n#!!block;n#ManualParser#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parsing/manparse_tests.kt">
+    <entry file="file://$PROJECT_DIR$/src/parsing/mparsing/manparse_tests.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#18#109#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/REPL/REPL.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>HLang</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>KotlinJavaRuntime</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
