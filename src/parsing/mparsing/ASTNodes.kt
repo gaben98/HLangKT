@@ -50,6 +50,21 @@ open class TupleNode(val components: Array<DataNode>): DataNode() {
 	}
 	override fun GetType(state: HState): IHType? = TupleType(components.map { it.GetType(state) }.requireNoNulls().toTypedArray())
 }
+open class VarDeclNode(val identifier: String, val type: String, val initialValue: DataNode?): DataNode() {
+	override fun Execute(state: HState): Pair<HData, HState> {
+		val (value, nstate) = if(initialValue != null) initialValue.Execute(state) else {
+			val etype = GetType(state)
+			if(etype != null) etype.Default() to state else HPUnit() to state
+		}
+		return value to HState(nstate.Identifiers + (identifier to value), nstate.Functions)
+	}
+
+	override fun GetType(state: HState): IHType? {
+		if(type == "var" && initialValue != null) return initialValue.GetType(state)
+		return HType.typeMap[type]
+	}
+}
+
 
 //functional nodes
 open class FunctionCallNode(val name: String, val call: TupleNode): DataNode() {

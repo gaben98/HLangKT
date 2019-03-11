@@ -4,10 +4,11 @@ import java.lang.Exception
 
 interface IHType {
 	fun Is(other: IHType): Boolean
+	fun Default(): HData
 }
 
-open class HType(private var children: Array<HType>, private val parent: HType?, name: String, val defVal: Any?): IHType {
-	open fun Define(child: String, defaultVal: Any? = null): HType {
+open class HType(private var children: Array<HType>, private val parent: HType?, name: String, val defVal: HData): IHType {
+	open fun Define(child: String, defaultVal: HData): HType {
 		if(child in typeMap) throw Exception("type has already been defined")
 		val ch = HType(arrayOf(), this, child, defaultVal)
 		typeMap[child] = ch
@@ -25,16 +26,20 @@ open class HType(private var children: Array<HType>, private val parent: HType?,
 		return false
 	}
 
+	override fun Default(): HData {
+		return defVal
+	}
+
 	companion object {
-		val HAny = HType(arrayOf(), null, "any", null)
+		val HAny = HType(arrayOf(), null, "any", HPUnit())
 
 		var typeMap: MutableMap<String, HType> = mutableMapOf("any" to HAny)
 
-		val HInt = HAny.Define("int", 0)
-		val HReal = HAny.Define("real", 0.0)
-		val HChar = HAny.Define("char", '0' - '0')
-		val HString = HAny.Define("string", "")
-		val HBool = HAny.Define("bool", false)
+		val HInt = HAny.Define("int", HPInt(0))
+		val HReal = HAny.Define("real", HPReal(0.0))
+		val HChar = HAny.Define("char", HPChar('0'))
+		val HString = HAny.Define("string", HPString(""))
+		val HBool = HAny.Define("bool", HPBool(false))
 		val HUnit = TupleType(arrayOf())
 	}
 }
@@ -46,6 +51,8 @@ open class TupleType(val componentTypes: Array<out IHType>): IHType {
 		}
 		return false
 	}
+
+	override fun Default(): HData = HPUnit()
 }
 
 open class SignatureType(val inputs: TupleType, val returnType: IHType = TupleType(arrayOf())): IHType {
@@ -57,5 +64,5 @@ open class SignatureType(val inputs: TupleType, val returnType: IHType = TupleTy
 		return false
 	}
 
-
+	override fun Default(): HData = HFunction(this) { HPUnit() }
 }

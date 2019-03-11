@@ -1,5 +1,6 @@
 package parsing.mparsing
 
+import core.typesystem.HType
 import parsing.tokenization.lsplit
 
 open class ManualParser {
@@ -9,7 +10,7 @@ open class ManualParser {
 			if(data != null) return ExprNode(data)
 		}
 		if(tokens.count { it == "(" } != tokens.count { it == ")" }) return null//if parens are imbalanced, def not an expression
-		val data = tryOptions<DataNode>(tokens, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseGroup, ::ParseFunctionCall)
+		val data = tryOptions<DataNode>(tokens, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseGroup, ::ParseFunctionCall, ::ParseVariableDeclaration)
 		if(data is ExprNode) return data
 		if(data != null) return ExprNode(data)
 		return null
@@ -91,6 +92,24 @@ open class ManualParser {
 		if(tokens.count() > 2 && tokens[1] == "(" && tokens.last() == ")") {
 			val tuple = ParseTuple(tokens.sliceArray(1..tokens.lastIndex))
 			if(tuple != null) return FunctionCallNode(tokens[0], tuple)
+		}
+		return null
+	}
+
+	open fun ParseVariableDeclaration(tokens: Array<String>): VarDeclNode? {
+		if(tokens.count() > 1) {
+			val type = tokens[0]
+			val id = tokens[1]
+
+			if(type == "var" && tokens.count() == 2) return null//var requires some expression for initial value
+
+			if(tokens.count() > 2 && tokens[2] == "=") {
+				val result = ParseExpression(tokens.sliceArray(3..tokens.lastIndex))
+				if(result != null) return VarDeclNode(id, type, result)
+				return null
+			}
+
+			return VarDeclNode(id, type, null)
 		}
 		return null
 	}
