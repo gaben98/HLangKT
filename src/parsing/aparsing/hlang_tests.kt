@@ -1,5 +1,5 @@
 package parsing.aparsing
-
+/*
 import org.junit.Test
 import java.util.*
 import kotlin.test.*
@@ -34,4 +34,4 @@ class test {
 		//val p = parseExpression(grammarTokenize("Id | Ham"), "Expr", Match())
 		println(Arrays.toString(vm.execute(arrayOf("5", "*", "x"))))
 	}
-}
+}*/

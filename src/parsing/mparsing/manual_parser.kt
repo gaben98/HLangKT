@@ -1,5 +1,6 @@
 package parsing.mparsing
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import core.typesystem.HType
 import parsing.tokenization.lsplit
 
@@ -10,7 +11,7 @@ open class ManualParser {
 			if(data != null) return ExprNode(data)
 		}
 		if(tokens.count { it == "(" } != tokens.count { it == ")" }) return null//if parens are imbalanced, def not an expression
-		val data = tryOptions<DataNode>(tokens, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseGroup, ::ParseFunctionCall, ::ParseVariableDeclaration)
+		val data = tryOptions<DataNode>(tokens, ::ParseVariableDeclaration, ::ParseVariableAssignment, ::ParseBinOp, ::ParseUnOp, ::ParseTuple, ::ParseGroup, ::ParseFunctionCall)
 		if(data is ExprNode) return data
 		if(data != null) return ExprNode(data)
 		return null
@@ -100,7 +101,7 @@ open class ManualParser {
 		if(tokens.count() > 1) {
 			val type = tokens[0]
 			val id = tokens[1]
-
+			if(!IsValidID(id)) return null
 			if(type == "var" && tokens.count() == 2) return null//var requires some expression for initial value
 
 			if(tokens.count() > 2 && tokens[2] == "=") {
@@ -113,6 +114,18 @@ open class ManualParser {
 		}
 		return null
 	}
+
+	open fun ParseVariableAssignment(tokens: Array<String>): AssignmentNode? {
+		if(tokens.count() > 2) {
+			if(tokens[1] != "=") return null
+			if(!IsValidID(tokens[0])) return null
+			val expr = ParseExpression(tokens.sliceArray(2..tokens.lastIndex)) ?: return null
+			return AssignmentNode(tokens[0], expr)
+		}
+		return null
+	}
+
+	private fun IsValidID(token: String): Boolean = "[A-z_][A-z0-9_]*".toRegex().matches(token)
 
 	open fun ParseUnOp(tks: Array<String>): UnOpNode? {
 		fun UnOpExpr(tokens: Array<String>, suffix: ExprNode): UnOpNode? {
@@ -138,12 +151,6 @@ open class ManualParser {
 				if(prefix != null && suffix != null) return BinOpNode(tks[index], prefix, suffix)
 			}
 		}
-		/*val binIndices = tks.mapIndexed { index: Int, s: String -> if (bins.contains(s)) index else null  }.filterNotNull()
-		for(index in binIndices) {
-			val prefix = ParseExpression(tks.sliceArray(0 until index))
-			val suffix = ParseExpression(tks.sliceArray(index+1..tks.lastIndex))
-			if(prefix != null && suffix != null) return BinOpNode(tks[index], prefix, suffix)
-		}*/
 		return null
 	}
 

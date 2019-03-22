@@ -1,101 +1,62 @@
 package core.environment
 
 import core.typesystem.*
-import javax.print.attribute.HashDocAttributeSet
+import java.util.*
 import kotlin.math.sign
 
-open class HState(val Identifiers: Map<String, HData>, val Functions: Map<String, HCallable>/*, val TypeMap: Map<String, HType>*/) {
+open class HState(val Identifiers: Map<String, HTypedData>, val Functions: Map<String, Array<out HCallable>>, val stack: Stack<StackFrame>) {
 	companion object {
 		fun Init(): HState {
-			val ids = mapOf<String, HData>()
-			val bangfn = MakeNative(HType.HBool, output = HType.HBool) { input: Array<HPrimitive> -> if(input[0] is HPBool) HPBool(!input[0].GetData<Boolean>()) else HPBool(false) }
-			val plusfn = MakeNative(HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { a, b -> a + b })
-			val timesfn = MakeNative(HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { a, b -> a * b })
-			val powerfn = MakeNative(HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { base, pow -> (1..pow).map { base }.reduce { acc, i -> acc * i } })
-			val fns = mapOf("!" to bangfn, "+" to plusfn, "*" to timesfn, "^" to powerfn)
-			return HState(ids, fns)
+			val ids = mapOf<String, HTypedData>()
+			val bangfn = MakeNative("!", HType.HBool, output = HType.HBool) { input: Array<HPrimitive>, state -> HTBool(!input[0].getValue<Boolean>()) to state }
+			val plusfn = MakeNative("+", HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { a, b -> a + b })
+			val multfn = MakeNative("*", HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { a, b -> a * b })
+			val powfn  = MakeNative("^", HType.HInt, HType.HInt, output = HType.HInt, func = WrapBinaryInt { base, pow -> (1..pow).map { base }.reduce { acc, i -> acc * i } })
+			val strconc = MakeNative("+", HType.HString, HType.HString, output = HType.HString, func = WrapBinaryString { a, b -> a + b })
+			val fns = mapOf("!" to arrayOf(bangfn), "+" to arrayOf(plusfn, strconc), "*" to arrayOf(multfn), "^" to arrayOf(powfn))
+			return HState(ids, fns, Stack(arrayOf()))
 		}
 
-		private fun MakeNative(vararg inputs: IHType, output: IHType = HType.HUnit, func: (Array<HPrimitive>) -> HData): HNative {
+		private fun MakeNative(name: String, vararg inputs: IHType, output: IHType = HType.HUnit, func: (Array<HPrimitive>, HState) -> Pair<HTypedData, HState>): HNative {
 			val signature = SignatureType(TupleType(inputs), output)
-			return HNative(signature, func)
+			return HNative(name, signature, func)
 		}
 
-		private fun WrapBinaryInt(func: (Int, Int) -> Int): (Array<HPrimitive>) -> HData {
-			return { if(it[0] is HPInt && it[1] is HPInt) HPInt(func(it[0].GetData(), it[1].GetData())) else HPInt(0) }
+		private fun WrapBinaryInt(func: (Int, Int) -> Int): (Array<HPrimitive>, HState) -> Pair<HTypedData, HState> {
+			return { inputArr, state -> HTInt(func(inputArr[0].getValue(), inputArr[1].getValue())) to state }
+		}
+
+		private fun WrapBinaryString(func: (String, String) -> String): (Array<HPrimitive>, HState) -> Pair<HTypedData, HState> {
+			return { inputArr, state -> HTString(func(inputArr[0].getValue(), inputArr[1].getValue())) to state }
 		}
 	}
-}
+	open fun with(ids: Map<String, HTypedData> = Identifiers, fns: Map<String, Array<out HCallable>> = Functions, stck: Stack<StackFrame> = stack): HState = HState(ids, fns, stck)
 
-
-fun Translate(data: HData): Any {
-	return when(data) {
-		is HStruct -> {
-			data.data.map { Translate(it) }
-		}
-		is HPBool -> data.data
-		is HPReal -> data.data
-		is HPInt -> data.data
-		is HPChar -> data.data
-		is HPString -> data.data
-		else -> Unit
+	open fun GetFunctionMatch(fn: String, inputs: TupleType): HCallable {
+		if(fn !in Functions) throw error("no such function exists")
+		val fns = Functions.getValue(fn).filter { inputs.Is(it.signature.inputs) }
+		if(fns.count() > 0) return fns[0]//TODO: in the future I need to pick the closest match
+		throw error("arguments do not match the function definition")
 	}
 }
-
-
 
 fun Array<HData>.requireAllPrimitive(): Array<HPrimitive> = this.map { if(it is HPrimitive) it else null }.requireNoNulls().toTypedArray()
 
-/*
-fun<T: HData> MakeFunction(vararg inputs: IHType, output: IHType = HType.HUnit, func: (T) -> HData): HFunction {
-	val8 tplInputs = TupleType(inputs)
-	val signature = SignatureType(tplInputs, output)
-	return HFunction(signature, func)
 
-	val tfunc: (HData) -> HData = fun(input: HData): HData {
-		when(input) {
-			is HStruct -> return HFunction(signature, func)
+data class StackFrame(var result: HTypedData)
 
-		}
-		val inputValues = (input.data as Array<*>).map { it as HData }
-		val params = inputs.zip(inputValues).map { HData(it.component1(), it.component2()) }.toTypedArray()
-		return func(params)
+//immutable stack
+open class Stack<K>(val arr: Array<K>) {
+	open fun push(elem: K): Stack<K> {
+		return Stack(arr + elem)
 	}
-	return HFunction(signature, tfunc)
-}*/
 
+	open fun pop(): Pair<K, Stack<K>> {
+		val nArr = arr.sliceArray(0 until arr.lastIndex)
+		return peek() to Stack(nArr)
+	}
 
-/*
-private fun<I, O> MakeNativeHFunc (signature: SignatureType, func: (I) -> O): HFunction {
-	//convert input HData into native data
-	//process to get output result
-	//convert output result to HData
-
-	val rt: (HData) -> HData = { MakeNativeHData(func(MakeHDataNative(it))) }
-	return HFunction(signature, rt)
+	open fun peek(): K {
+		return arr[arr.lastIndex]
+	}
 }
-
-private fun<T> ToNative(data: HData): T {
-	return when(data.htype) {
-		is TupleType -> {
-			if(data.data is Array<*>) {
-				return data.data.map { ToNative(it) }
-			}
-		}
-		else -> data.data
-	} as T
-}
-
-private fun<T> MakeNativeHData (value: T): HData {
-	val t: IHType = when(value) {
-		is Int -> HType.HInt
-		is Double -> HType.HReal
-		is Float -> HType.HReal
-		is Boolean -> HType.HBool
-		is Char -> HType.HChar
-		is String -> HType.HString
-		is Unit -> TupleType(arrayOf())
-		else -> HType.HAny
-	}!!
-	return HData(t, value)
-}*/

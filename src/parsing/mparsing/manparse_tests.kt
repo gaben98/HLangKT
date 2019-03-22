@@ -10,10 +10,14 @@ class ManParseTest {
     @Test
     fun testManParse () {
 		val parser = ManualParser()
-		val tokens = hlangTokenize("int x = 5")
+		val tokens1 = hlangTokenize("var x = (5, \"a string\")")
+		//val tokens2 = hlangTokenize("x = x + 4 + y")
 		val initialState = HState.Init()
-		val parsed = parser.ParseExpression(tokens)
-		val result = parsed?.Execute(initialState)
-		print(result)
+		val l1 = parser.ParseExpression(tokens1)
+		//val l2 = parser.ParseExpression(tokens2)
+		val (data1, state1) = l1!!.Execute(initialState)
+		//val (data2, state2) = l2!!.Execute(state1)
+		print(data1)
+		//print(data2)
 	}
 }
