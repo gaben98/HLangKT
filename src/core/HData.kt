@@ -6,7 +6,7 @@ import core.environment.requireAllPrimitive
 abstract class HData(var Data: Any?) {
 	override fun toString(): String = Data.toString()
 }
-open class HTypedData(var type: IHType, var data: HData) {
+open class HTypedData(val type: IHType, var data: HData) {
 	override fun toString(): String = "$type: $data"
 }
 abstract class HPrimitive(data: Any?): HData(data) {
@@ -28,16 +28,16 @@ class HPChar(data: Char): HPrimitive(data)
 class HPString(data: String): HPrimitive(data)
 class HPUnit: HPrimitive(Unit)
 
-//typed versions of data primitives
-class HTBool(data: Boolean): HTypedData(HType.HBool, HPBool(data))
+//typed versions of booldata primitives
+class HTBool(var booldata: Boolean): HTypedData(HType.HBool, HPBool(booldata))
 class HTReal(data: Double): HTypedData(HType.HReal, HPReal(data))
-class HTInt(data: Int): HTypedData(HType.HInt, HPInt(data))
+class HTInt(var intdata: Int): HTypedData(HType.HInt, HPInt(intdata))
 class HTChar(data: Char): HTypedData(HType.HChar, HPChar(data))
-class HTString(data: String): HTypedData(HType.HString, HPString(data)) {
+class HTString(val stringdata: String): HTypedData(HType.HString, HPString(stringdata)) {
 	override fun toString(): String = "\"$data\""
 }
 class HTUnit: HTypedData(HType.HUnit, HPUnit())
-
+class HTFailure: HTypedData(HType.HFailure, HPUnit())
 
 abstract class HCallable(val name: String, val signature: SignatureType): HData(signature) {
 	open fun call(inputs: Array<HTypedData>, state: HState): Pair<HTypedData, HState> {

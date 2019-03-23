@@ -40,17 +40,17 @@ fun genericTokenize(text: String, vararg iDelims: String, eDelims: String, toggl
 
 fun grammarTokenize(text: String): Array<String> = genericTokenize(text, *("()[]+*|?;".map { it.toString() }.toTypedArray() + arrayOf(":=")), eDelims = " 	", toggles =  "\"")
 
-fun hlangTokenize(text: String): Array<String> = genericTokenize(text, *"()[]+*|?!;,".map { it.toString() }.toTypedArray(), eDelims = " 	", toggles = "\"")
+fun hlangTokenize(text: String): Array<String> = genericTokenize(text, *"()[]<>+*|?!;,".map { it.toString() }.toTypedArray(), eDelims = " 	", toggles = "\"")
 
 //splits tokens but only splits at the base level
-fun lsplit(tokens: Array<String>, opener: String, closer: String, splitter: String): Array<Array<String>> {
+fun lsplit(tokens: Array<String>, opener: String, closer: String, splitters: Array<String>): Array<Array<String>> {
 	fun lsp(tks: Array<String>, lvl: Int, buffer: Array<String>): Array<Array<String>> {
 		if(tks.isEmpty()) return arrayOf(buffer)
-		val tail = tks.sliceArray(1 until tks.count())
+		val tail = tks.sliceArray(1..tks.lastIndex)
 		return when(tks[0]) {
 			opener -> lsp(tail, lvl+1, buffer + if(lvl == 0) arrayOf(opener) else arrayOf())
 			closer -> lsp(tail, lvl-1, buffer + if(lvl == 1) arrayOf(closer) else arrayOf())
-			splitter -> {
+			in splitters -> {
 				if(lvl == 0) arrayOf(buffer) + lsp(tail, lvl, arrayOf())
 				else lsp(tail, lvl, buffer + tks[0])
 			}
@@ -58,4 +58,20 @@ fun lsplit(tokens: Array<String>, opener: String, closer: String, splitter: Stri
 		}
 	}
 	return lsp(tokens, 0, arrayOf())
+}
+
+//selects the most tokens at the base level until that level is closed.  Thus,
+//lselect(["a", "(", "B", ")", ")"], "(", ")") returns ["a", "(", "B", ")"]
+fun lselect(tokens: Array<String>, opener: String, closer: String): Array<String> {
+	fun lslct(tks: Array<String>, lvl: Int, buffer: Array<String>): Array<String> {
+		if(tks.isEmpty() || lvl < 0) return buffer
+		val tail = tks.sliceArray(1..tks.lastIndex)
+		return when(tks[0]) {
+			opener -> lslct(tail, lvl+1, buffer + opener)
+			closer -> lslct(tail, lvl-1, if(lvl > 0) buffer + closer else buffer)
+			else -> lslct(tail, lvl, buffer + tks[0])
+		}
+	}
+
+	return lslct(tokens, 0, arrayOf())
 }
